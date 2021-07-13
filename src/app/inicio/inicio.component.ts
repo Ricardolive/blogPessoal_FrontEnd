@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.prod';
 import { Postagem } from '../model/Postagem';
 import { Tema } from '../model/Tema';
 import { User } from '../model/User';
+import { AlertasService } from '../service/alertas.service';
 import { AuthService } from '../service/auth.service';
 import { PostagemService } from '../service/postagem.service';
 import { TemaService } from '../service/tema.service';
@@ -21,18 +22,23 @@ export class InicioComponent implements OnInit {
   idTema: number;
   user: User = new User();
   idUser = environment.id;
-  listaPostagens: Postagem[]
+  listaPostagens: Postagem[];
+  key = 'data';
+  reverse = true;
+  tituloPost: string;
+  nomeTema: string;
+  
   
 
 
-  constructor(private router: Router, private postagemService: PostagemService, private temaService: TemaService, private authService: AuthService) { }
+  constructor(private router: Router, private postagemService: PostagemService, private temaService: TemaService, private authService: AuthService, private alertas: AlertasService) { }
 
   ngOnInit() {
 
     window.scroll(0, 0)
 
     if (environment.token == '') {
-      alert('Sua sessão expirou, faça login novamente.')
+      this.alertas.showAlertInfo('Sua sessão expirou, faça login novamente.')
       this.router.navigate(['/entrar'])
     }
 
@@ -77,10 +83,36 @@ export class InicioComponent implements OnInit {
 
     this.postagemService.postPostagens(this.postagem).subscribe((resp: Postagem)=>{
       this.postagem = resp
-      alert('Postagem realizada com sucesso!')
+      this.alertas.showAlertSuccess('Postagem realizada com sucesso!')
       this.postagem = new Postagem()
       this.getAllPostagens()
     })
+  }
+
+
+  findByTituloPostagem(){
+
+    if(this.tituloPost== ''){
+      this.getAllPostagens()
+    }else{
+      this.postagemService.getByTituloPostagem(this.tituloPost).subscribe((resp: Postagem[])=>{
+        this.listaPostagens = resp
+      })
+    }
+    
+  }
+
+  findByNomeTema(){
+
+    if(this.nomeTema == ''){
+      this.getAllTemas()
+    }
+    else{
+      this.temaService.getByNomeTema(this.nomeTema).subscribe((resp: Tema[])=>{
+        this.listaTemas = resp
+      })
+    }
+
   }
 
 
