@@ -8,3 +8,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.btn-secondary{
+    background-color: rgb(41, 41, 185);
+}

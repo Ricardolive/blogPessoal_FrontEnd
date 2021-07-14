@@ -104,6 +104,9 @@
 
           <div class="card-columns" *ngFor='let tema of listaTemas '>
             <div class="card text-center" *ngFor='let item of tema.postagem | orderBy : key : reverse'>
+              <div class="card-header p-0 pt-2">
+                <p class="f-14">{{tema.descricao}}</p>
+              </div>
               <div class="card-body">
                 <h5 class="card-title m-0">{{item.titulo}}</h5>
                 <p class="card-text mt-3">{{item.texto}}</p>
@@ -124,8 +127,8 @@
   <div class="modal fade" id="novaPostagem" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="TituloModalCentralizado">Nova Postagem</h5>
+        <div class="modal-header bg-azul">
+          <h5 class="modal-title text-white" id="TituloModalCentralizado">Nova Postagem</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -143,7 +146,7 @@
           </div>
 
           <div class="form-group">
-            <label for="texto">Escolha um tema ou <a data-dismiss="modal" routerLink='/tema'>cadastre um novo</a>: </label>
+            <label for="texto">Escolha um tema  <a *ngIf='authService.adm()'  data-dismiss="modal" routerLink='/tema'>cadastre um novo</a>: </label>
             <select name="tema" id="tema" class="form-control" [(ngModel)]='idTema' (change)='findByIdTema()' >
                 <option *ngFor='let item of listaTemas' value="{{item.id}}">{{item.descricao}}</option>
             </select>
@@ -152,7 +155,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-success" (click)='publicar()' data-dismiss="modal">Publicar</button>
+          <button type="button" class="btn btn-secondary" (click)='publicar()' data-dismiss="modal">Publicar</button>
         </div>
       </div>
     </div>

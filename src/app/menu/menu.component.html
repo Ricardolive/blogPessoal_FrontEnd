@@ -15,15 +15,15 @@
           </li>
 
           <li class="nav-item pl-3">
-              <a [routerLink]="['/user-edit', id]">
-                <p class="text-white fs-16 m-0">Editar</p>
-              </a>
+                <button  [routerLink]="['/user-edit', id]" class="btn btn-secondary">Editar Perfil</button> 
+      
           </li>
 
         </ul>
 
         <ul class="navbar-nav ml-auto d-flex align-items-center">
-            <a class="m-0 font-weight-bold text-white" (click)='sair()'> Sair</a>
+            <button class="btn btn-secondary" (click)='sair()'> Sair</button>
+ 
         </ul>
 
         

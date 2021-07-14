@@ -37,15 +37,21 @@ export class CadastrarComponent implements OnInit {
   cadastrar(){
     this.user.tipo = this.tipoUsuario
 
-    if(this.user.senha != this.confirmarSenha){
-  this.alertas.showAlertDanger('As senhas estão incorretas');
-    } else{
-          this.authService.cadastrar(this.user).subscribe((resp: User)=> {
-              this.user = resp;
-  this.router.navigate(['/entrar'])
-  this.alertas.showAlertSuccess('Usuário cadastrado com sucesso!');
-          })
-      }
+    if(this.user.nome == null || this.user.usuario == null || this.user.senha == null || this.user.tipo== null){
+        this.alertas.showAlertDanger('Preencha todos os campos para o cadastro!')
+    }
+    else{
+
+      if(this.user.senha != this.confirmarSenha){
+    this.alertas.showAlertDanger('As senhas estão incorretas');
+      } else{
+            this.authService.cadastrar(this.user).subscribe((resp: User)=> {
+            this.user = resp;
+            this.router.navigate(['/entrar'])
+            this.alertas.showAlertSuccess('Usuário cadastrado com sucesso!');
+            })
+        }
+    }
   }
 
 

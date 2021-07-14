@@ -1,7 +1,7 @@
-<div class="container">
-    <div class="row">
+<div class="container-fluid">
+    <div class="row bg-roxo p-3 my-3">
         <div class="col-md-12">
-            <h1 class="text-center text-secondary">Atualizar Tema</h1>
+            <h1 class="text-center text-white">Atualizar Tema</h1>
         </div>
     </div>
 
@@ -9,13 +9,13 @@
         <div class="col-md-6">
 
             <div class="form-group">
-                <label for="descricao">Descrição</label>
+                <label  class="f-14" for="descricao">Descrição</label>
                 <input [(ngModel)]='tema.descricao' type="text" class="form-control" id="descricao">
             </div>
 
             <div class="d-flex justify-content-center my-4">
                 <button class="btn btn-danger mr-4" routerLink='/tema'>Cancelar</button>
-                <button class="btn btn-success" (click)='atualizar()'>Atualizar</button>
+                <button class="btn btn-secondary" (click)='atualizar()'>Atualizar</button>
             </div>
 
         </div>
